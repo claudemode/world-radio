@@ -1146,8 +1146,8 @@
     gap:16px;
   }
   .np-meta{
-    min-width:0;
-    flex:1;
+    min-width:120px;
+    flex:1 1 150px;
     display:flex;
     align-items:center;
     gap:10px;
@@ -1165,14 +1165,15 @@
     white-space:normal;
     overflow:hidden;
     display:-webkit-box;
-    -webkit-line-clamp:2;
+    -webkit-line-clamp:3;
     -webkit-box-orient:vertical;
+    overflow-wrap:anywhere;
   }
   .np-sub{
     font-family:var(--font-mono);
     font-size:10.5px;color:var(--brass);
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-    display:flex;align-items:center;gap:6px;
+    white-space:normal;overflow:visible;overflow-wrap:anywhere;
+    display:flex;flex-wrap:wrap;align-items:center;gap:2px 6px;
     margin-top:2px;
   }
 
@@ -1531,7 +1532,7 @@
         <span>POWER</span>
       </button>
       <button type="button" class="hover-speech-btn" id="hoverSpeechBtn" aria-pressed="false" hidden>&#128266;</button>
-      <span class="creator-credit">Criator：加藤竹志</span>
+      <span class="creator-credit">&copy; 2026 加藤竹志 All rights reserved.</span>
       <select class="lang-select" id="langSelect" aria-label="Language / 言語"></select>
       <div class="status-chip"><span class="status-text status-standby" id="onAirText">STANDBY</span></div>
     </div>
