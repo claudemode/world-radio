@@ -3560,6 +3560,19 @@
     return fetch(url, {signal: controller.signal}).finally(function(){ clearTimeout(id); });
   }
 
+  /* Stations that must never be shown (e.g. on request from a broadcaster
+     or rights holder). Add one line per station:
+       "stationuuid-from-radio-browser",   // station name / reason / date
+     The station's uuid is the "stationuuid" field in the Radio Browser data. */
+  var BLOCKED_STATIONS = [
+  ];
+  function removeBlockedStations(list){
+    if (!Array.isArray(list) || !BLOCKED_STATIONS.length) return list;
+    return list.filter(function(st){
+      return !(st && st.stationuuid && BLOCKED_STATIONS.indexOf(st.stationuuid) >= 0);
+    });
+  }
+
   function fetchStations(code){
     var path = "/json/stations/bycountrycodeexact/" + encodeURIComponent(code) +
       "?hidebroken=true&order=clickcount&reverse=true&limit=60";
@@ -3576,7 +3589,7 @@
         })
         .catch(function(){ return tryHost(); });
     }
-    return tryHost();
+    return tryHost().then(removeBlockedStations);
   }
 
   function registerClick(uuid){
